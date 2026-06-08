@@ -6,19 +6,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.ServerSocket;
 
 import java.net.Socket;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ServerController {
 
@@ -49,14 +45,11 @@ public class ServerController {
 
                 DataInputStream in = new DataInputStream(socket.getInputStream());
 
-                String message;
+
 
                 while (true) {
 
-                    message = in.readUTF();
 
-                    final String msg = message;
-                    Platform.runLater(() -> txtArea.appendText(msg + "\n"));
 
                     receiveFile(in);
 
@@ -127,7 +120,6 @@ public class ServerController {
     private void handleSendFile(ActionEvent event) {
 
         if (fileToSend == null) {
-            Platform.runLater(() -> txtArea.appendText("No file selected to send.\n"));
             return;
         }
 

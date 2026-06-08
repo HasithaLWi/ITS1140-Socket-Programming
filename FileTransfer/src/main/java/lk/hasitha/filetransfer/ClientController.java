@@ -71,7 +71,7 @@ public class ClientController {
                                 totalRead += bytesRead;
                             }
 
-                            Platform.runLater(() -> txtArea.appendText("File: " + fileName + " (" + fileSize + " bytes)\n"));
+
                             Platform.runLater(() ->
                                     txtArea.appendText("File received and saved to: " + outputFile.getAbsolutePath() + "\n"));
                             System.out.println("File saved successfully as: " + outputFile.getName());
@@ -122,7 +122,6 @@ public class ClientController {
                 String fileName = fileToSend.getName();
 
                 // Send metadata first: command, name, size
-                dos.writeUTF("FILE:" + fileName);
                 dos.writeUTF(fileName);
                 dos.writeLong(fileToSend.length());
 
@@ -138,7 +137,6 @@ public class ClientController {
 
                     Platform.runLater(() -> {
                         txtArea.appendText("File sent: " + fileName + "\n");
-                        lblSelectedFile.setText("no file selected");
                     });
                     dos.flush();
 
@@ -153,7 +151,7 @@ public class ClientController {
 
     @FXML
     private void handleClear(ActionEvent event) {
-        lblSelectedFile.setText("no file selected");
+        lblSelectedFile.setText("file not selected");
         fileToSend = null;
 
     }
